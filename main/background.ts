@@ -1,7 +1,7 @@
 import { app, ipcMain, dialog } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
-import fs from 'fs';
+import fs from "fs";
 
 const isProd: boolean = process.env.NODE_ENV === "production";
 
@@ -37,7 +37,7 @@ if (isProd) {
           if (err) {
             return console.log(err);
           }
-          event.sender.send("open-project", JSON.stringify(JSON.parse(data)));
+          event.sender.send("open-project", JSON.parse(data));
         });
       })
       .catch((err) => {

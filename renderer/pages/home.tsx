@@ -1,40 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import electron from "electron";
-import { Button } from "@chakra-ui/react";
+import { Button, Link } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
+
 import { useAppData } from "../hooks/useAppData";
 
+const defaultValue = `function sayHi() {
+  console.log("hello world");
+}`;
+
+
 const ipcRenderer = electron.ipcRenderer || undefined;
+
+const AceEdit = dynamic(() => import("../components/AceEditor"), {
+  ssr: false,
+});
 
 const Home = () => {
   const { appState, setAppState } = useAppData();
 
-  if (ipcRenderer) {
-    // In this scope, the webpack process is the client
-  }
+  const [lang, setLang] = useState('html');
+  const [theme, setTheme] = useState('github');
+  const [readOnly, setReadOnly] = useState(false);
 
 
-  React.useEffect(() => {
-    ipcRenderer.on("open-project", (event, data) => {
-      setAppState(data);
-    });
-
-    return () => {
-      ipcRenderer.removeAllListeners("open-project");
-    };
-  }, []);
 
   return (
     <Layout>
       <>
-        <Button
-          onClick={() => {
-            ipcRenderer?.send("open-project");
-          }}
-        >
-          Open Project
-        </Button>
-        {appState}
+        <Link href="/code">Code</Link>
+        <AceEdit
+          mode={lang}
+          theme={theme}
+          defaultValue={defaultValue}
+          readOnly={readOnly}
+          height="400px"
+          width="400px"
+        />
       </>
     </Layout>
   );

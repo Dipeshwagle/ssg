@@ -1,12 +1,23 @@
 import React from "react";
-import { Box, Flex, Heading, Button } from "@chakra-ui/react";
+import { Box, Flex, HStack, Heading, Button } from "@chakra-ui/react";
+import { useAppData } from "../hooks/useAppData";
 
 const Header = () => {
+  const { appState, openProject } = useAppData();
+
   return (
     <Box px="10" py="5" background="orange.50">
-      <Flex justifyContent="space-between">
+      <Flex justifyContent="space-between" alignItems="center">
         <Heading size="md">Static Site Generator</Heading>
-        <Button colorScheme='orange'>Publish</Button>
+        <HStack>
+          <Heading size="sm" color="orange.500">{appState?.name}</Heading>
+          <Button colorScheme="orange" onClick={openProject}>
+            Open Project
+          </Button>
+          <Button colorScheme="orange" disabled={!appState}>
+            Publish
+          </Button>
+        </HStack>
       </Flex>
     </Box>
   );

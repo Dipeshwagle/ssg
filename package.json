@@ -11,9 +11,10 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "ace-builds": "^1.4.13",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.0.1",
-    "framer-motion": "^4"
+    "react-ace": "^9.5.0"
   },
   "devDependencies": {
     "@chakra-ui/react": "^1.7.2",
@@ -24,6 +25,7 @@
     "@types/react": "^16.9.49",
     "electron": "^15.0.0",
     "electron-builder": "^22.11.7",
+    "framer-motion": "^4",
     "next": "^11.1.2",
     "nextron": "^7.1.0",
     "react": "^17.0.2",
