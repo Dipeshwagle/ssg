@@ -13,7 +13,7 @@ const AceEditor = dynamic(async () => {
     require(`ace-builds/src-noconflict/theme-${theme}`)
   })
   return ace
-})
+},{ssr:false})
 
 
 interface IProps extends Omit<IAceEditorProps,'setOptions'> {
