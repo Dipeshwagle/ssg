@@ -1,5 +1,4 @@
-import createWindow from './create-window';
+import createWindow from "./create-window";
+import { readProject, syncProject, publishProject } from "./files";
 
-export {
-  createWindow,
-};
+export { createWindow, readProject, syncProject, publishProject };

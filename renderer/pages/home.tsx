@@ -1,44 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/Layout";
-import electron from "electron";
-import { Button, Link } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
 
 import { useAppData } from "../hooks/useAppData";
 
-const defaultValue = `function sayHi() {
-  console.log("hello world");
-}`;
-
-
-const ipcRenderer = electron.ipcRenderer || undefined;
-
-const AceEdit = dynamic(() => import("../components/AceEditor"), {
-  ssr: false,
-});
-
 const Home = () => {
-  const { appState, setAppState } = useAppData();
+  const { appState } = useAppData();
 
-  const [lang, setLang] = useState('html');
-  const [theme, setTheme] = useState('github');
-  const [readOnly, setReadOnly] = useState(false);
-
-
+  useEffect(() => {
+    if( typeof window !== "undefined" ) {
+    const formattedContent = `${appState?.codes?.header}${appState?.codes?.footer}`;
+    const iframe = document.querySelector("iframe");
+    iframe.src = "data:text/html," + encodeURIComponent(formattedContent);
+    }
+  }, [appState]);
 
   return (
     <Layout>
-      <>
-        <Link href="/code">Code</Link>
-        <AceEdit
-          mode={lang}
-          theme={theme}
-          defaultValue={defaultValue}
-          readOnly={readOnly}
-          height="400px"
-          width="400px"
-        />
-      </>
+      <iframe width="450px" height="450px" />
     </Layout>
   );
 };

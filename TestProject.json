@@ -1,0 +1,7 @@
+{
+    "name": "Sugar",
+    "codes": {
+        "header": "<header><h1>Header Code</h1></header>",
+        "footer": "<footer><h2>Footer Code</h2></footer>"
+    }
+}
