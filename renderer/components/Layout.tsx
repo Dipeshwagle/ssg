@@ -12,9 +12,9 @@ const Layout = ({ children }: Props) => {
   return (
     <Box>
       <Header />
-      <Flex mt="2">
+      <Flex mt="2" width='full'>
         <Sidebar/>
-        <Box py="4">{children}</Box>
+        <Flex py="4" width='full'>{children}</Flex>
       </Flex>
     </Box>
   );

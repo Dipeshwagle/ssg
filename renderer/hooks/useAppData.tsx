@@ -3,12 +3,20 @@ import electron from "electron";
 
 const ipcRenderer = electron.ipcRenderer || undefined;
 
+interface Page {
+  code:string;
+  head:string;
+}
+
 interface AppState {
   name: string;
   codes: {
     header: string;
     footer: string;
   };
+  pages:{
+    index:Page
+  }
 }
 
 interface AppContext {
@@ -48,7 +56,6 @@ const useAppDataProvider = () => {
 
   useEffect(() => {
     ipcRenderer.on("open-project", (event, projectDetails) => {
-      console.log("projectDetails", projectDetails);
       setAppState(projectDetails);
     });
 

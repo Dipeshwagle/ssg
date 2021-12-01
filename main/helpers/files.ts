@@ -1,11 +1,16 @@
 import fs from "fs";
 import path from "path";
 
+import { returnEmptyIfUndefined } from "../helpers";
+
 interface AppState {
   name: string;
   codes: {
     header: string;
     footer: string;
+  };
+  pages: {
+    index: string;
   };
 }
 
@@ -22,6 +27,10 @@ export const publishProject = (
   content: AppState
 ): void => {
   const htmlPath = path.join(path.dirname(projectPath), "index.html");
-  const formattedContent = `${content?.codes?.header}${content?.codes?.footer}`;
+  const formattedContent = `${returnEmptyIfUndefined(
+    content?.codes?.header
+  )}${returnEmptyIfUndefined(content?.pages?.index)}${returnEmptyIfUndefined(
+    content?.codes?.footer
+  )}`;
   fs.writeFileSync(htmlPath, formattedContent);
 };

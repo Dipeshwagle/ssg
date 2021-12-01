@@ -21,17 +21,17 @@ const FooterCode = () => {
   };
   return (
     <Layout>
-      <Box p="4">
+      <Box p="4"  w="full">
         <AceEdit
           mode="html"
           theme="solarized_dark"
           defaultValue={appState?.codes?.footer}
           value={code}
-          height="800px"
+          height="100%"
           onChange={(value) => {
             handleFooterCodeChange(value);
           }}
-          width="800px"
+          width="100%"
         />
       </Box>
     </Layout>

@@ -9,7 +9,6 @@ import { useAppData } from "../../hooks/useAppData";
 const HeaderCode = () => {
   const [code, setCode] = useState("");
   const { appState, setAppState } = useAppData();
-  console.log({appState})
 
   const handleHeaderCodeChange = (code) => {
     setCode(code);
@@ -23,17 +22,17 @@ const HeaderCode = () => {
   };
   return (
     <Layout>
-      <Box p="4">
+      <Box p="4"  w="full">
         <AceEdit
           mode="html"
           theme="solarized_dark"
           defaultValue={appState?.codes?.header}
           value={code}
-          height="800px"
+          height="100%"
           onChange={(value) => {
             handleHeaderCodeChange(value);
           }}
-          width="800px"
+          width="100%"
         />
       </Box>
     </Layout>

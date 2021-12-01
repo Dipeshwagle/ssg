@@ -1,9 +1,22 @@
 import React from "react";
-import { Box, Flex, HStack, Heading, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  HStack,
+  Heading,
+  Button,
+  Editable,
+  EditableInput,
+  EditablePreview,
+} from "@chakra-ui/react";
 import { useAppData } from "../hooks/useAppData";
 
 const Header = () => {
-  const { appState, openProject, handlePublish } = useAppData();
+  const { appState,setAppState, openProject, handlePublish } = useAppData();
+
+  const handleProjectNameChange = (name: string) => {
+    setAppState({ ...appState, name });
+  }
 
   return (
     <Box px="10" py="5" background="orange.50">
@@ -11,7 +24,17 @@ const Header = () => {
         <Heading size="md">Static Site Generator</Heading>
         <HStack>
           <Heading size="sm" color="orange.500">
-            {appState?.name}
+            <Editable
+              value={
+                appState?.name
+                  ? appState.name
+                  : "New project click to change name"
+              }
+              onChange={handleProjectNameChange}
+            >
+              <EditablePreview />
+              <EditableInput />
+            </Editable>
           </Heading>
           <Button colorScheme="orange" onClick={openProject}>
             Open Project
